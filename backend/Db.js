@@ -13,30 +13,36 @@ const userSchema = new mongoose.Schema({
         required : true,
         unique : true,
         minLength : 5,
-        maxLength : 20
     },
     firstName : {
         type : String,
         required : true,
-        minLength : 5,
-        maxLength : 20
+        minLength : 4,
     },
     lastName : {
         type : String,
         required : true,
-        unique : true,
-        minLength : 5,
-        maxLength : 20
+        minLength : 5
     },
     password : {
         type : String,
         required : true,
         minLength : 5,
-        maxLength : 20
     }
 })
 
-const User = mongoose.model('User',userSchema);
+const accountSchema = new mongoose.Schema({
+    userId : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'User',
+        required : true
+    },
+    balance : {
+        type : Number,
+        required : true
+    }
+})
 
+export const User = mongoose.model('User',userSchema);
+export const Account = mongoose.model('Account',accountSchema);
 
-export default User
